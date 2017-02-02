@@ -493,9 +493,11 @@ zap_lockdir_impl(dmu_buf_t *db, void *tag, dmu_tx_t *tx,
 	ASSERT0(db->db_offset);
 	*zapp = NULL;
 
+#if 0
 	dmu_object_info_from_db(db, &doi);
 	if (DMU_OT_BYTESWAP(doi.doi_type) != DMU_BSWAP_ZAP)
 		return (SET_ERROR(EINVAL));
+#endif
 
 	zap = dmu_buf_get_user(db);
 	if (zap == NULL) {

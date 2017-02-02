@@ -1260,7 +1260,7 @@ dmu_tx_hold_sa_create(dmu_tx_t *tx, int attrsize)
 		return;
 
 	if (tx->tx_objset->os_sa->sa_layout_attr_obj) {
-		dmu_tx_hold_zap(tx, sa->sa_layout_attr_obj, B_TRUE, NULL);
+	//	dmu_tx_hold_zap(tx, sa->sa_layout_attr_obj, B_TRUE, NULL);
 	} else {
 		dmu_tx_hold_zap(tx, sa->sa_master_obj, B_TRUE, SA_LAYOUTS);
 		dmu_tx_hold_zap(tx, sa->sa_master_obj, B_TRUE, SA_REGISTRY);
