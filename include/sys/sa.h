@@ -119,6 +119,8 @@ typedef struct sa_handle sa_handle_t;
 
 typedef void (sa_update_cb_t)(sa_handle_t *, dmu_tx_t *tx);
 
+#define HAS_SA_HANDLE_ALLOC
+sa_handle_t *sa_handle_alloc(void);
 int sa_handle_get(objset_t *, uint64_t, void *userp,
     sa_handle_type_t, sa_handle_t **);
 int sa_handle_get_from_db(objset_t *, dmu_buf_t *, void *userp,

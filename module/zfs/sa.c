@@ -2030,7 +2030,15 @@ sa_handle_unlock(sa_handle_t *hdl)
 	mutex_exit(&hdl->sa_lock);
 }
 
+sa_handle_t *
+sa_handle_alloc()
+{
+       return kmem_cache_alloc(sa_cache, KM_SLEEP);
+}
+
+
 #ifdef _KERNEL
+EXPORT_SYMBOL(sa_handle_alloc);
 EXPORT_SYMBOL(sa_handle_get);
 EXPORT_SYMBOL(sa_handle_get_from_db);
 EXPORT_SYMBOL(sa_handle_destroy);
