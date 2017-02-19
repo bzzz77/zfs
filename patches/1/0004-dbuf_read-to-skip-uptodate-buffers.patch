@@ -1,0 +1,25 @@
+From 074fb1f88919536f3fefff5cc168a16b49f5cbf4 Mon Sep 17 00:00:00 2001
+From: Alexey Zhuravlev <alexey.zhuravlev@intel.com>
+Date: Fri, 3 Feb 2017 11:52:48 -0700
+Subject: [PATCH 4/6] dbuf_read() to skip uptodate buffers
+
+---
+ module/zfs/dbuf.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/module/zfs/dbuf.c b/module/zfs/dbuf.c
+index 096f74a..9927be0 100644
+--- a/module/zfs/dbuf.c
++++ b/module/zfs/dbuf.c
+@@ -1182,6 +1182,8 @@ dbuf_read(dmu_buf_impl_t *db, zio_t *zio, uint32_t flags)
+ 
+ 	if (db->db_state == DB_NOFILL)
+ 		return (SET_ERROR(EIO));
++	if (db->db_state == DB_CACHED)
++		return (0);
+ 
+ 	DB_DNODE_ENTER(db);
+ 	dn = DB_DNODE(db);
+-- 
+1.8.3.1
+

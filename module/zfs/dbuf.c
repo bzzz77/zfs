@@ -1182,6 +1182,8 @@ dbuf_read(dmu_buf_impl_t *db, zio_t *zio, uint32_t flags)
 
 	if (db->db_state == DB_NOFILL)
 		return (SET_ERROR(EIO));
+	if (db->db_state == DB_CACHED)
+		return (0);
 
 	DB_DNODE_ENTER(db);
 	dn = DB_DNODE(db);
